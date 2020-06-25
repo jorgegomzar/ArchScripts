@@ -52,7 +52,7 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn("st")),
+    Key([mod], "Return", lazy.spawn("alacritty")),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -63,7 +63,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd()),
 ]
 
-groups_names = ["web","code","social","media","games"]
+groups_names = ["","","","",""]
 groups = [Group(name) for name in groups_names]
 
 for i, name in enumerate(groups_names,1):
@@ -88,8 +88,8 @@ layouts = [
 
 widget_defaults = dict(
     font='sans',
-    fontsize=12,
-    padding=3,
+    fontsize=20,
+    padding=10,
 )
 extension_defaults = widget_defaults.copy()
 
