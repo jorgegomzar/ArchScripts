@@ -30,7 +30,28 @@ from libqtile import layout, bar, widget
 
 from typing import List  # noqa: F401
 
+def init_colors():
+	return [["#2F343F", "#2F343F"],		# color 0
+			["#2F343F", "#2F343F"],		# color 1
+			["#c0c5ce", "#c0c5ce"],		# color 2
+			["#fba922", "#fba922"],		# color 3
+			["#3384d0", "#3384d0"],		# color 4
+			["#f3f4f5", "#f3f4f5"],		# color 5
+			["#cd1f3f", "#cd1f3f"],		# color 6
+			["#62ff00", "#62ff00"],		# color 7
+			["#6790eb", "#6790eb"],		# color 8
+			["#a9a9a9", "#a9a9a9"],]	# color 9
+
+def init_widget_defaults():
+	return dict(
+	    font='Noto Sans',
+	    fontsize=16,
+	    padding=10,
+	    background=colors[1])
+
 mod = "mod4"
+
+colors = init_colors()
 
 keys = [
     # Switch between windows in current stack pane
@@ -79,33 +100,118 @@ layouts = [
     # layout.Matrix(),
     # layout.MonadTall(),
     # layout.MonadWide(),
-    layout.RatioTile(),
-    # layout.Tile(),
+    layout.RatioTile(margin=5),
+    # layout.Floating(),
+    # layout.Tile(),	
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
 
-widget_defaults = dict(
-    font='sans',
-    fontsize=20,
-    padding=10,
-)
+widget_defaults = init_widget_defaults()
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
 	wallpaper='~/Pictures/login-background.png',
 	wallpaper_mode='fill',
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
+                widget.GroupBox(font="FontAwesome",
+                				fontsize = 24,
+                				disable_drag = True,
+                				active = colors[9],
+                				inactive = colors[5],
+                				rounded = False,
+                				highlight_method = "text",
+                				this_current_screen_border = colors[8],
+                				foreground = colors[6],
+                				background = colors[1]),
+                widget.Sep(
+                			linewidth = 1,
+                			padding = 10,
+                			foreground = colors[6],
+                			background = colors[1]),
+                widget.CurrentLayout(
+            					font = "Noto Sans Bold",
+            					foreground = colors[5],
+            					background = colors[1]
+        						),
+                widget.Sep(
+                			linewidth = 1,
+                			padding = 10,
+                			foreground = colors[6],
+                			background = colors[1]),
                 widget.Prompt(),
-                widget.WindowName(),
-                widget.TextBox("yumiya config", name="yumiya"),
-                widget.Systray(),
-                widget.Clock(format='%d-%m-%Y %a %I:%M %p'),
+                widget.WindowName(
+                				font = "Noto Sans",
+                				fontsize = 14,
+            					foreground = colors[5],
+            					background = colors[1]
+            					),
+                widget.TextBox(
+                				font = "FontAwesome",
+                				text = "  ",
+            					foreground = colors[6],
+            					background = colors[1],
+            					padding = 0,
+            					fontsize = 20
+                				),
+                widget.CPUGraph(
+                				border_color = colors[2],
+                				fill_color = colors[8],
+                				graph_color = colors[8],
+                				border_width = 1,
+                				core = "all",
+                				type = "box"
+                				),
+                #widget.Sep(
+                #			linewidth = 1,
+                #			padding = 10,
+                #			foreground = colors[2],
+                #			background = colors[1]),
+                #widget.TextBox(
+                #				font = "FontAwesome",
+                #				text = "  ",
+            	#				foreground = colors[2],
+            	#				background = colors[1],
+            	#				padding = 0,
+            	#				fontsize = 20
+                #				),
+                #widget.Memory(
+                #				font = "Noto Sans",
+                #				fmt = '{MemUsed}/{MemTotal}M',
+                #				update_interval = 5,
+				#				fontsize = 12
+                #				foreground = colors[5],
+                #				background = colors[1]
+                #				),
+                widget.Sep(
+                			linewidth = 1,
+                			padding = 10,
+                			foreground = colors[2],
+                			background = colors[1]),
+                widget.TextBox(
+                				font = "FontAwesome",
+                				text = "  ",
+            					foreground = colors[3],
+            					background = colors[1],
+            					padding = 0,
+            					fontsize = 20
+                				),
+                widget.Clock(format='%I:%M %p %d-%m-%Y',
+                				foreground = colors[5],
+                				background = colors[1]),
+                widget.Sep(
+                			linewidth = 1,
+                			padding = 10,
+                			foreground = colors[2],
+                			background = colors[1]),
+                widget.Systray(
+                			background = colors[1],
+                			icon_size = 20,
+                			padding = 4,
+            				),
                 widget.QuickExit(),
             ],
             24,
@@ -157,3 +263,5 @@ focus_on_window_activation = "smart"
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
+
