@@ -1,0 +1,4 @@
+#!/bin/bash
+# Simply mounts my Drive Storage in my filesystem
+# Requires google-drive-ocamlfuse
+google-drive-ocamlfuse "/home/jorge/Documentos/Drive (jorge.gomzar)/"

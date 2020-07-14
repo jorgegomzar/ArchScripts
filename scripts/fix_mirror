@@ -1,0 +1,11 @@
+#!/bin/bash
+# When using second monitor is always configured as mirror,
+# this fixes it
+
+MON1=`xrandr | grep connected | awk '{print $1}' | grep eDP`
+MON2=`xrandr | grep connected | awk '{print $1}' | grep HDMI`
+
+xrandr --output $MON1 --auto --output $MON2 --auto --right-of $MON1
+sleep 3
+# Stops flickering mouse, kinda works
+xrandr --output $MON2 --scale 0.9999x0.9999
