@@ -23,7 +23,7 @@ ACTUAL=`cat /sys/class/backlight/amdgpu_bl0/brightness`
 valor=`echo $1 | sed 's/^[+,-]//'`
 
 # Si el valor introducido no es formato aceptado -> ERROR
-if ! [[ $valor =~ $re ]] && ([ $1 != "up" ] && [ $1 != "down" ]); then
+if [ $# -ne 1 ] || (! [[ $valor =~ $re ]] && [ $1 != "up" ] && [ $1 != "down" ]); then
     echo "error: introduce un numero o up/down" >&2; exit 1
 fi
 
